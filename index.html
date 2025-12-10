@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AARNAA · Architecture & Design Portfolio </title>
+    <title>Aarna Shrimali · Architecture & Design Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        /* RESET & BASICS */
+        /* Keeping original styling for consistency */
         * {
             margin: 0;
             padding: 0;
@@ -16,194 +16,163 @@
         }
         
         :root {
-            /* SWISS STYLE PALETTE */
-            --primary: #000000;       /* Stark Black */
-            --secondary: #555555;     /* Dark Grey for body text */
-            --accent: #E60000;        /* THE HIGHLIGHT RED */
-            --bg: #FFFFFF;            /* Pure White */
-            --line: #E0E0E0;          /* Light grey lines */
+            --primary: #000000;
+            --secondary: #666666;
+            --accent: #999999;
+            --light-bg: #FAFAFA;
+            --white: #FFFFFF;
+            --border: #E5E5E5;
         }
         
         body {
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
+            font-family: 'Inter', -apple-system, sans-serif;
+            font-size: 13px;
             font-weight: 300;
-            line-height: 1.6;
+            line-height: 1.7;
             color: var(--primary);
-            background: var(--bg);
-            -webkit-font-smoothing: antialiased;
+            background: var(--white);
+            letter-spacing: -0.01em;
         }
-
-        /* TYPOGRAPHY UTILS */
-        .mono {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--primary);
-            transition: color 0.2s ease;
-        }
-
-        a:hover {
-            color: var(--accent);
-        }
-
-        /* HEADER */
+        
         header {
-            background: rgba(255, 255, 255, 0.98);
-            border-bottom: 2px solid var(--primary); /* Thicker black line */
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100;
+            backdrop-filter: blur(10px);
         }
         
         nav {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 1.5rem 3rem;
+            padding: 1.2rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
         .logo {
-            font-weight: 600;
-            font-size: 16px;
-            letter-spacing: -0.02em;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--primary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
         
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 2.5rem;
             list-style: none;
         }
         
         .nav-links a {
-            font-size: 12px;
-            font-weight: 500;
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 11px;
+            font-weight: 300;
+            transition: color 0.2s;
+            letter-spacing: 0.02em;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
         }
-
+        
         .nav-links a:hover {
-            color: var(--accent);
-            text-decoration: underline;
-            text-decoration-color: var(--accent);
-            text-underline-offset: 4px;
+            color: var(--primary);
         }
-
-        /* HERO SECTION */
+        
         .hero {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
             padding: 8rem 3rem 6rem;
-            border-bottom: 1px solid var(--line);
         }
         
         .hero-content {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
         }
         
         .hero h1 {
-            font-size: 64px;
-            font-weight: 600;
-            letter-spacing: -0.04em;
-            line-height: 1;
-            margin-bottom: 2rem;
-        }
-
-        .hero h1 span {
-            color: var(--accent); /* Makes the last name or dot red if desired, currently applied to text via span if needed */
+            font-size: 48px;
+            font-weight: 200;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            line-height: 1.1;
         }
         
         .hero .subtitle {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--accent); /* Red Subtitle */
-            font-size: 14px;
-            margin-bottom: 2rem;
-            display: block;
+            font-size: 15px;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            color: var(--secondary);
+            letter-spacing: 0.01em;
         }
         
         .hero .description {
-            font-size: 18px;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.8;
             color: var(--secondary);
-            max-width: 700px;
-            margin-bottom: 3rem;
-        }
-
-        .resume-link {
-            display: inline-block;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 1rem 2rem;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: all 0.2s;
-        }
-
-        .resume-link:hover {
-            background: var(--accent);
-            color: white;
+            max-width: 650px;
+            letter-spacing: 0.01em;
         }
         
         .hero-metrics {
-            display: flex;
-            gap: 4rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
             margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--line);
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .metric {
+            text-align: left;
         }
         
         .metric-value {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 32px;
-            color: var(--accent); /* Red Numbers */
-            font-weight: 400;
+            font-size: 28px;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
         }
         
         .metric-label {
-            font-size: 11px;
+            font-size: 10px;
+            font-weight: 300;
+            color: var(--secondary);
             text-transform: uppercase;
-            color: var(--primary);
-            font-weight: 600;
-            margin-top: 0.5rem;
+            letter-spacing: 0.1em;
         }
-
-        /* SKILLS STRIP */
+        
         .skills {
-            padding: 1.5rem 3rem;
-            border-bottom: 1px solid var(--line);
-            background: var(--bg);
-            overflow-x: auto;
+            padding: 3rem 3rem;
+            background: var(--light-bg);
+            border-bottom: 1px solid var(--border);
         }
         
         .skills-container {
             max-width: 1400px;
             margin: 0 auto;
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
         
-        .skill-item {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .skill-badge {
+            background: var(--white);
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            font-size: 10px;
+            font-weight: 300;
             color: var(--secondary);
-            white-space: nowrap;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
         
-        .skill-item:before {
-            content: "•";
-            color: var(--accent);
-            margin-right: 0.5rem;
-        }
-
-        /* PROJECTS GRID */
-        #projects {
+        section {
             padding: 5rem 3rem;
         }
         
@@ -212,145 +181,184 @@
             margin: 0 auto;
         }
         
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 4rem;
-            border-bottom: 4px solid var(--primary); /* Thick black line */
-            padding-bottom: 1rem;
-        }
-
         .section-title {
-            font-size: 32px;
-            font-weight: 600;
-            letter-spacing: -0.02em;
+            font-size: 10px;
+            color: var(--secondary);
+            margin-bottom: 4rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
         }
         
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 Column layout */
-            gap: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
         }
         
         .project-card {
-            background: var(--bg);
+            background: var(--white);
+            padding: 3rem;
+            transition: background 0.2s, transform 0.2s;
             cursor: pointer;
-            group: project;
-            position: relative;
-            transition: transform 0.2s;
         }
-
+        
         .project-card:hover {
-            transform: translateY(-5px);
+            background: var(--light-bg);
+            transform: translateY(-2px);
         }
-
-        /* The Red Number */
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
         .project-number {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 48px;
-            color: var(--line);
-            margin-bottom: 1rem;
-            display: block;
-            transition: color 0.2s;
+            font-size: 10px;
+            font-weight: 300;
+            color: var(--accent);
+            letter-spacing: 0.1em;
         }
-
-        .project-card:hover .project-number {
-            color: var(--accent); /* Turns red on hover */
+        
+        .project-year {
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 0.05em;
         }
         
         .project-title {
-            font-size: 24px;
-            font-weight: 500;
+            font-size: 20px;
+            color: var(--primary);
             margin-bottom: 0.5rem;
-            border-left: 0px solid var(--accent);
-            transition: all 0.2s;
-        }
-
-        .project-card:hover .project-title {
-            color: var(--accent);
-            padding-left: 10px;
-            border-left: 3px solid var(--accent); /* Red line appears on left */
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
         }
         
         .project-meta {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
             color: var(--secondary);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
+            font-size: 11px;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.01em;
         }
         
-        .project-desc {
-            font-size: 14px;
+        .project-description {
             color: var(--secondary);
-            margin-bottom: 1.5rem;
-            max-width: 90%;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 13px;
+            font-weight: 300;
         }
-
-        .tags-list {
+        
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 22px;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .stat-label {
+            font-size: 9px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .project-tags {
             display: flex;
+            flex-wrap: wrap;
             gap: 0.5rem;
+        }
+        
+        .tag {
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 0.3rem 0.8rem;
+            font-size: 9px;
+            color: var(--secondary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+        
+        .contact {
+            background: var(--light-bg);
+            border-top: 1px solid var(--border);
+            padding: 5rem 3rem;
+        }
+        
+        .contact .container {
+            text-align: center;
+            max-width: 700px;
+        }
+        
+        .contact p {
+            font-size: 13px;
+            color: var(--secondary);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+        
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
             flex-wrap: wrap;
         }
-
-        .tag {
-            font-size: 10px;
-            padding: 4px 8px;
-            border: 1px solid var(--line);
-            text-transform: uppercase;
-        }
-
-        .project-card:hover .tag {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        /* CONTACT */
-        .contact {
-            padding: 6rem 3rem;
-            background: #F5F5F5;
-            border-top: 1px solid var(--line);
-        }
         
-        .contact-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact h2 {
-            font-size: 24px;
-            margin-bottom: 2rem;
-        }
-        
-        .email-link {
-            font-size: 32px;
-            font-weight: 600;
+        .contact-btn {
+            background: transparent;
             color: var(--primary);
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 5px;
+            padding: 1rem 2rem;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.2s;
         }
         
-        .email-link:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-            padding: 0 10px;
+        .contact-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
         }
-
-        /* FOOTER */
+        
         footer {
             background: var(--primary);
-            color: white;
-            padding: 2rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
         }
-
-        /* MODAL (Popup) */
+        
         .modal {
             display: none;
             position: fixed;
@@ -358,318 +366,517 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
             z-index: 1000;
             overflow-y: auto;
+            padding: 3rem;
         }
         
         .modal.active {
-            display: block;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
         }
         
-        .modal-container {
+        .modal-content {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 4rem;
             max-width: 900px;
-            margin: 5rem auto;
-            padding: 0 2rem;
+            width: 100%;
+            margin-top: 3rem;
             position: relative;
         }
-
-        .close-btn {
-            position: fixed;
+        
+        .modal-close {
+            position: absolute;
             top: 2rem;
-            right: 3rem;
-            font-size: 40px;
-            color: var(--primary);
+            right: 2rem;
+            font-size: 24px;
             cursor: pointer;
-            line-height: 1;
+            color: var(--secondary);
+            background: none;
+            border: none;
+            font-weight: 200;
+            transition: color 0.2s;
         }
-
-        .close-btn:hover {
-            color: var(--accent);
-        }
-
-        .modal-header {
-            margin-bottom: 4rem;
-            border-bottom: 1px solid var(--accent); /* Red line */
-            padding-bottom: 2rem;
-        }
-
-        .modal-title {
-            font-size: 48px;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
-
-        .modal-meta {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--accent);
-        }
-
-        .modal-body h3 {
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-top: 3rem;
-            margin-bottom: 1rem;
+        
+        .modal-close:hover {
             color: var(--primary);
         }
-
-        .modal-body p, .modal-body li {
-            font-size: 16px;
-            color: #444;
-            max-width: 700px;
+        
+        .modal-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .modal-section {
+            margin-bottom: 3rem;
+        }
+        
+        .modal-section h3 {
+            color: var(--primary);
             margin-bottom: 1rem;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
-
-        .modal-body ul {
-            padding-left: 1rem;
+        
+        .modal-section p {
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--secondary);
+            font-weight: 300;
         }
-
-        .modal-body li::marker {
+        
+        .modal-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .modal-section li {
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--secondary);
+            font-weight: 300;
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-section li:before {
+            content: "—";
+            position: absolute;
+            left: 0;
             color: var(--accent);
         }
-
-        /* RESPONSIVE */
+        
+        .highlight-box {
+            background: var(--light-bg);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
         @media (max-width: 768px) {
-            .hero h1 { font-size: 42px; }
-            .projects-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .nav-links { display: none; } /* Simplified for mobile */
-            .modal-title { font-size: 32px; }
-            .hero-metrics { flex-wrap: wrap; gap: 2rem; }
+            nav {
+                padding: 1rem 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .hero {
+                padding: 5rem 1.5rem 4rem;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            section {
+                padding: 3rem 1.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-card {
+                padding: 2rem;
+            }
+            
+            .modal {
+                padding: 1rem;
+            }
+            
+            .modal-content {
+                padding: 2rem 1.5rem;
+                margin-top: 1rem;
+            }
+            
+            .project-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
 <body>
-
     <header>
         <nav>
-            <div class="logo">AARNA SHRIMALI</div>
+            <div class="logo">Aarna Shrimali</div>
             <ul class="nav-links">
-                <li><a href="#about">Profile</a></li>
-                <li><a href="#projects">Selected Work</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Work</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="about" class="hero">
+    <section class="hero" id="about">
         <div class="hero-content">
-            <span class="subtitle">PORTFOLIO 2025</span>
-            <h1>Architecture<br>Spatial Design<br><span style="color: var(--accent);">User Experience</span></h1>
+            <h1>Aarna Shrimali</h1>
+            <p class="subtitle">Architecture Student · Graphic Designer · Spatial Thinker</p>
             <p class="description">
-                B.Arch Student at SPA Bhopal. Exploring the intersection of psychological ease, functional clarity, and cultural tactility in the built environment.
+                Student at the <span style="color: var(--primary); border-bottom: 1px solid var(--border);">School of Planning and Architecture, Bhopal</span>. 
+                Focusing on how architecture can soften emotional weight through spatial design.
+                Experienced in Revit, AutoCAD, and Rhino 3D, combining technical precision with a culturally familiar tactile quality.
+                <br><br>
+                <a href="Profile (1).pdf" target="_blank" style="color: var(--primary); text-decoration: underline; text-decoration-color: var(--border); font-weight: 400;">View Resume (PDF) →</a>
             </p>
-            <a href="Profile (1).pdf" target="_blank" class="resume-link">Download Resume (PDF)</a>
-
+            
             <div class="hero-metrics">
-                <div>
+                <div class="metric">
                     <div class="metric-value">2029</div>
-                    <div class="metric-label">Class of</div>
+                    <div class="metric-label">B.Arch Class</div>
                 </div>
-                <div>
-                    <div class="metric-value">3+</div>
-                    <div class="metric-label">Design Tools</div>
+                <div class="metric">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">Core Tools</div>
                 </div>
-                <div>
-                    <div class="metric-value">02</div>
+                <div class="metric">
+                    <div class="metric-value">5+</div>
+                    <div class="metric-label">Yrs Design Exp</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">3</div>
                     <div class="metric-label">Languages</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="skills">
+    <section class="skills">
         <div class="skills-container">
-            <span class="skill-item">Revit</span>
-            <span class="skill-item">AutoCAD</span>
-            <span class="skill-item">Rhino 3D</span>
-            <span class="skill-item">Graphic Design</span>
-            <span class="skill-item">Model Making</span>
-            <span class="skill-item">Adobe Suite</span>
-            <span class="skill-item">Sketching</span>
+            <span class="skill-badge">Revit</span>
+            <span class="skill-badge">AutoCAD</span>
+            <span class="skill-badge">Rhino 3D</span>
+            <span class="skill-badge">Adobe Creative Suite</span>
+            <span class="skill-badge">Graphic Design</span>
+            <span class="skill-badge">Architectural Planning</span>
+            <span class="skill-badge">Hindi (Native)</span>
+            <span class="skill-badge">English (Native)</span>
+            <span class="skill-badge">Team Leadership</span>
         </div>
-    </div>
+    </section>
 
     <section id="projects">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Selected Projects</h2>
-                <span class="mono">2023 — 2025</span>
-            </div>
-
+            <h2 class="section-title">Selected Work</h2>
+            
             <div class="projects-grid">
-                
                 <div class="project-card" onclick="openModal('phc')">
-                    <span class="project-number">01</span>
-                    <h3 class="project-title">The Well of Time</h3>
-                    <div class="project-meta">Primary Health Centre · Bhopal</div>
-                    <p class="project-desc">
-                        Reimagining the healthcare experience by softening the emotional weight of waiting through architectural compression and release.
+                    <div class="project-header">
+                        <span class="project-number">01</span>
+                        <span class="project-year">2025</span>
+                    </div>
+                    <h3 class="project-title">The Well of Time: Primary Health Centre</h3>
+                    <p class="project-meta">Bhopal, MP · Healthcare / Public Infrastructure</p>
+                    <p class="project-description">
+                        Reimagining the PHC as an environment where the emotional weight of waiting is softened through architecture. 
+                        A design guided by psychological ease and functional clarity.
                     </p>
-                    <div class="tags-list">
+                    
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">RCC</div>
+                            <div class="stat-label">Frame</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Passive</div>
+                            <div class="stat-label">Cooling</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">Zones</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-tags">
                         <span class="tag">Healthcare</span>
-                        <span class="tag">Academic</span>
-                        <span class="tag">Year 2</span>
+                        <span class="tag">Psychology</span>
+                        <span class="tag">Bhopal</span>
+                        <span class="tag">Climatic Responsive</span>
                     </div>
                 </div>
 
                 <div class="project-card" onclick="openModal('nsa')">
-                    <span class="project-number">02</span>
+                    <div class="project-header">
+                        <span class="project-number">02</span>
+                        <span class="project-year">Summer 2025</span>
+                    </div>
                     <h3 class="project-title">NSA+ Internship</h3>
-                    <div class="project-meta">Professional Practice · Summer 2025</div>
-                    <p class="project-desc">
-                        Bridging conceptual design and technical documentation through advanced 3D modelling and parametric workflows.
+                    <p class="project-meta">Architecture Internship · 3D Modelling</p>
+                    <p class="project-description">
+                        Summer internship focusing on technical documentation and 3D visualization. 
+                        Assisted in the modelling of two major architectural projects using advanced software workflows.
                     </p>
-                    <div class="tags-list">
-                        <span class="tag">Internship</span>
+                    
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">2</div>
+                            <div class="stat-label">Key Projects</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">3D</div>
+                            <div class="stat-label">Modelling</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Firm</div>
+                            <div class="stat-label">Experience</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-tags">
+                        <span class="tag">Professional Practice</span>
                         <span class="tag">3D Modelling</span>
-                        <span class="tag">Revit</span>
+                        <span class="tag">Collaboration</span>
                     </div>
                 </div>
 
                 <div class="project-card" onclick="openModal('graphic')">
-                    <span class="project-number">03</span>
-                    <h3 class="project-title">Visual Identity</h3>
-                    <div class="project-meta">Freelance Design · 5 Years</div>
-                    <p class="project-desc">
-                        A curated collection of graphic design work focusing on brand identity, editorial layout, and visual storytelling.
+                    <div class="project-header">
+                        <span class="project-number">03</span>
+                        <span class="project-year">2020-Present</span>
+                    </div>
+                    <h3 class="project-title">Freelance Graphic Design</h3>
+                    <p class="project-meta">Self Employed · Visual Identity</p>
+                    <p class="project-description">
+                        Over 5 years of experience as a freelance graphic designer. 
+                        Creating visual identities, branding materials, and digital assets while pursuing architectural studies.
                     </p>
-                    <div class="tags-list">
+                    
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">5+</div>
+                            <div class="stat-label">Years</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Visual</div>
+                            <div class="stat-label">Identity</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Digital</div>
+                            <div class="stat-label">Media</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-tags">
+                        <span class="tag">Graphic Design</span>
                         <span class="tag">Freelance</span>
-                        <span class="tag">Graphics</span>
-                        <span class="tag">Branding</span>
+                        <span class="tag">Visual Communication</span>
                     </div>
                 </div>
 
-                <div class="project-card" onclick="openModal('extra')">
-                    <span class="project-number">04</span>
-                    <h3 class="project-title">Leadership</h3>
-                    <div class="project-meta">MoE's Innovation Cell</div>
-                    <p class="project-desc">
-                        Driving student creativity through the "Passion Projects" initiative and organizing talks for the TedEd Club.
+                 <div class="project-card" onclick="openModal('extra')">
+                    <div class="project-header">
+                        <span class="project-number">04</span>
+                        <span class="project-year">2022-2024</span>
+                    </div>
+                    <h3 class="project-title">Leadership & Innovation</h3>
+                    <p class="project-meta">MoE's Innovation Cell · TedEd Club</p>
+                    <p class="project-description">
+                        Active involvement in academic and innovation circles. Led efforts to introduce "Passion Projects" 
+                        within the Innovation Cell and served as a speaker/member for the TedEd Club.
                     </p>
-                    <div class="tags-list">
-                        <span class="tag">Management</span>
+                    
+                    <div class="project-tags">
+                        <span class="tag">Leadership</span>
                         <span class="tag">Public Speaking</span>
+                        <span class="tag">Innovation</span>
+                        <span class="tag">Management</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
     <section id="contact" class="contact">
-        <div class="contact-content">
-            <h2>Let's build something together.</h2>
-            <a href="mailto:aarnashrimali8638@gmail.com" class="email-link">aarnashrimali8638@gmail.com</a>
-            <br><br><br>
-            <a href="https://www.linkedin.com/in/aarna-shrimali-029983209" style="border-bottom: 1px solid var(--accent);">LinkedIn Profile ↗</a>
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <p>
+                Open to collaborations and architectural opportunities.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:aarnashrimali8638@gmail.com" class="contact-btn">Email</a>
+                <a href="https://www.linkedin.com/in/aarna-shrimali-029983209" class="contact-btn">LinkedIn</a>
+            </div>
         </div>
     </section>
 
     <footer>
-        <div>© 2025 Aarna Shrimali</div>
-        <div>Designed in Code</div>
+        <p>© 2025 Aarna Shrimali</p>
     </footer>
 
     <div id="phcModal" class="modal">
-        <span class="close-btn" onclick="closeModal('phc')">&times;</span>
-        <div class="modal-container">
-            <div class="modal-header">
-                <div class="modal-meta">PROJECT 01 / ACADEMIC</div>
-                <h2 class="modal-title">The Well of Time:<br>Primary Health Centre</h2>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('phc')">&times;</button>
+            <h2 class="modal-title">The Well of Time: Primary Health Centre</h2>
+            
+            <div class="modal-section">
+                <h3>Overview</h3>
+                <p>
+                    <strong>Location:</strong> Bhopal, Madhya Pradesh<br>
+                    <strong>Structure:</strong> RCC Frame with Infill Walls<br><br>
+                    "The Well of Time" reimagines the Primary Health Centre (PHC) as an environment where the emotional weight of waiting is softened through architecture. Rather than functioning as a purely clinical institution, the PHC becomes a gentle spatial journey — from compression to expansion to stillness.
+                </p>
             </div>
-            <div class="modal-body">
-                <p><strong>Location:</strong> Bhopal, Madhya Pradesh<br><strong>Typology:</strong> Healthcare</p>
-                <p>The "Well of Time" reimagines the Primary Health Centre not just as a clinical facility, but as a space of psychological ease. The design organizes the building around a high, light-filled courtyard, turning it into a calm "time well" that naturally ventilates and anchors the entire plan.</p>
-                
+
+            <div class="highlight-box">
                 <h3>Design Philosophy</h3>
-                <p>The design utilizes a gradient of height to influence user experience: Registration areas have lower ceilings to ground the user, while the central courtyard opens up to the sky to provide release and connection to nature.</p>
-                
-                <h3>Key Features</h3>
+                <p>The design is guided by two principles: psychological ease and functional clarity. The building is organized around a high, light-filled courtyard, turning it into a calm "time well" that naturally ventilates and anchors the entire plan.</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>Zoning Strategy</h3>
                 <ul>
-                    <li>Stack Ventilation system through central courtyard</li>
-                    <li>Locally sourced stone and brick masonry</li>
-                    <li>Perforated clerestory for glare-free daylight</li>
+                    <li><strong>Public Zone:</strong> Registration and waiting areas placed at the front, defined by lower ceilings that slow the mind and create a grounded entry.</li>
+                    <li><strong>Shared / Community Zone:</strong> A double-height central courtyard acts as the emotional and climatic core. This is where time "opens up," aided by diffused light and shaded edges.</li>
+                    <li><strong>Clinical / Private Zone:</strong> Consultation rooms and treatment areas occupy the quieter low-height wings, offering a return to comfort, privacy, and stillness.</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Key Architectural Features</h3>
+                <ul>
+                    <li><strong>Height as Experience:</strong> The form transitions low → high → low, shaping a psychological gradient from tension to release to calm.</li>
+                    <li><strong>Passive Cooling:</strong> The courtyard works as a stack-ventilation well, drawing cool air through shaded corridors and releasing warm air upward.</li>
+                    <li><strong>Light Control:</strong> A subtle clerestory band with perforations brings in soft, non-glare daylight.</li>
+                    <li><strong>Materiality:</strong> Locally available stone, brick, and exposed concrete to create a robust, low-maintenance public building with culturally familiar tactile quality.</li>
                 </ul>
             </div>
         </div>
     </div>
 
     <div id="nsaModal" class="modal">
-        <span class="close-btn" onclick="closeModal('nsa')">&times;</span>
-        <div class="modal-container">
-            <div class="modal-header">
-                <div class="modal-meta">PROJECT 02 / PROFESSIONAL</div>
-                <h2 class="modal-title">NSA+ Internship<br>Summer 2025</h2>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('nsa')">&times;</button>
+            <h2 class="modal-title">Summer Internship @ NSA+</h2>
+            
+            <div class="modal-section">
+                <h3>Overview</h3>
+                <p>
+                   During the Summer of 2025, I interned at NSA+, an architectural firm known for its rigorous design approach. My primary focus was on bridging the gap between design concepts and digital representation.
+                </p>
             </div>
-            <div class="modal-body">
-                <p>During my internship at NSA+, I was responsible for bridging the gap between schematic design and design development through rigorous 3D modelling.</p>
-                <h3>Scope</h3>
+
+            <div class="modal-section">
+                <h3>Key Responsibilities</h3>
                 <ul>
-                    <li>3D Modelling for large-scale residential projects</li>
-                    <li>Documentation assistance for municipal approval drawings</li>
-                    <li>Coordination with senior architects on geometric rationalization</li>
+                    <li><strong>3D Modelling:</strong> Spearheaded the 3D modelling for two significant firm projects.</li>
+                    <li><strong>Design Development:</strong> Assisted senior architects in refining geometric forms and spatial layouts within the digital environment.</li>
+                    <li><strong>Software Proficiency:</strong> Utilized Rhino 3D and Revit to ensure model accuracy and detailed visualization.</li>
                 </ul>
             </div>
         </div>
     </div>
 
     <div id="graphicModal" class="modal">
-        <span class="close-btn" onclick="closeModal('graphic')">&times;</span>
-        <div class="modal-container">
-            <div class="modal-header">
-                <div class="modal-meta">PROJECT 03 / FREELANCE</div>
-                <h2 class="modal-title">Graphic Design<br>& Visual Identity</h2>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('graphic')">&times;</button>
+            <h2 class="modal-title">Freelance Graphic Design</h2>
+            
+            <div class="modal-section">
+                <h3>Experience</h3>
+                <p>
+                   With over 5 years of experience (September 2020 - Present), I have worked as a self-employed graphic designer alongside my architectural studies. This dual-discipline approach allows me to understand composition, hierarchy, and visual communication at both 2D and 3D scales.
+                </p>
             </div>
-            <div class="modal-body">
-                <p>With over 5 years of experience as a freelance graphic designer, I approach visual communication with the same rigor as architectural space.</p>
-                <h3>Services</h3>
+            
+            <div class="modal-section">
+                <h3>Scope of Work</h3>
                 <ul>
-                    <li>Logo & Brand Identity Design</li>
-                    <li>Architectural Presentation Layouts</li>
-                    <li>Social Media & Marketing Assets</li>
+                    <li>Brand Identity Design</li>
+                    <li>Layout & Editorial Design</li>
+                    <li>Digital Asset Creation</li>
+                    <li>Visual storytelling for architectural presentations</li>
                 </ul>
             </div>
         </div>
     </div>
 
     <div id="extraModal" class="modal">
-        <span class="close-btn" onclick="closeModal('extra')">&times;</span>
-        <div class="modal-container">
-            <div class="modal-header">
-                <div class="modal-meta">PROJECT 04 / EXTRACURRICULAR</div>
-                <h2 class="modal-title">Leadership<br>& Innovation</h2>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('extra')">&times;</button>
+            <h2 class="modal-title">Leadership & Community</h2>
+            
+            <div class="modal-section">
+                <h3>MoE's Innovation Cell (2023-2024)</h3>
+                <p>
+                   As a member, I led the effort to introduce and establish "Passion Projects" within the I-Cell of my school, presenting the idea and driving its integration into the academic program to foster student creativity.
+                </p>
             </div>
-            <div class="modal-body">
-                <h3>Roles</h3>
-                <ul>
-                    <li><strong>MoE's Innovation Cell:</strong> Led the "Passion Projects" initiative to integrate student-led research into the academic curriculum.</li>
-                    <li><strong>TedEd Club:</strong> Active speaker and organizer, facilitating dialogue on design and culture.</li>
-                    <li><strong>Good Earth Enterprise:</strong> General Manager (2023-2024).</li>
-                </ul>
+
+            <div class="modal-section">
+                <h3>Good Earth Enterprise (2023-2024)</h3>
+                <p>
+                   Served as General Manager for 1 year, overseeing operations and team coordination.
+                </p>
+            </div>
+
+            <div class="modal-section">
+                <h3>TedEd Club (2022-Present)</h3>
+                <p>
+                   Active member and speaker, engaging in public speaking and idea dissemination.
+                </p>
             </div>
         </div>
     </div>
 
     <script>
-        function openModal(id) {
-            document.getElementById(id + 'Modal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+        function openModal(project) {
+            const modal = document.getElementById(project + 'Modal');
+            if(modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         }
 
-        function closeModal(id) {
-            document.getElementById(id + 'Modal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close on outside click
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.classList.remove('active');
+        function closeModal(project) {
+            const modal = document.getElementById(project + 'Modal');
+            if(modal) {
+                modal.classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
         }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
