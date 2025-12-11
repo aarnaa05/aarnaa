@@ -6,9 +6,9 @@
     <title>Aarna Shrimali · Architecture & Design Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        /* Keeping original styling for consistency */
+        /* RESET & BASICS */
         * {
             margin: 0;
             padding: 0;
@@ -16,31 +16,52 @@
         }
         
         :root {
-            --primary: #000000;
+            --primary: #050505;
             --secondary: #666666;
-            --accent: #999999;
-            --light-bg: #FAFAFA;
-            --white: #FFFFFF;
+            --accent: #E60000;
+            --bg: #FFFFFF;
             --border: #E5E5E5;
+            --surface: #FAFAFA;
+            /* Framer-like Spring Easing */
+            --ease: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 300;
-            line-height: 1.7;
+            line-height: 1.6;
             color: var(--primary);
-            background: var(--white);
-            letter-spacing: -0.01em;
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
-        
+
+        /* --- ANIMATION UTILITIES --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes loadUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- NAVIGATION --- */
         header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.85);
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
         
         nav {
@@ -55,7 +76,7 @@
         .logo {
             font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
-            font-weight: 400;
+            font-weight: 500;
             color: var(--primary);
             letter-spacing: 0.05em;
             text-transform: uppercase;
@@ -71,7 +92,7 @@
             text-decoration: none;
             color: var(--secondary);
             font-size: 11px;
-            font-weight: 300;
+            font-weight: 400;
             transition: color 0.2s;
             letter-spacing: 0.02em;
             text-transform: uppercase;
@@ -80,9 +101,10 @@
         .nav-links a:hover {
             color: var(--primary);
         }
-        
+
+        /* --- HERO SECTION --- */
         .hero {
-            background: var(--white);
+            background: var(--bg);
             border-bottom: 1px solid var(--border);
             padding: 8rem 3rem 6rem;
         }
@@ -92,13 +114,29 @@
             margin: 0 auto;
         }
         
+        /* --- INTERACTIVE HEADING (THE BOLD EFFECT) --- */
         .hero h1 {
-            font-size: 48px;
-            font-weight: 200;
-            letter-spacing: -0.03em;
+            font-family: 'Inter', sans-serif; /* Explicitly Inter */
+            font-size: 64px;
             margin-bottom: 1rem;
             color: var(--primary);
-            line-height: 1.1;
+            line-height: 1;
+            cursor: default;
+            display: flex;
+            gap: 1px; 
+            animation: loadUp 0.8s ease forwards;
+        }
+
+        .hero h1 span {
+            display: inline-block;
+            transition: transform 0.2s var(--ease), font-weight 0.2s ease, color 0.2s ease;
+            font-weight: 500; /* MEDIUM THICKNESS BASE */
+        }
+
+        .hero h1 span:hover {
+            font-weight: 700; /* SNAPS TO BOLD */
+            color: var(--accent);
+            transform: scale(1.05) translateY(-2px);
         }
         
         .hero .subtitle {
@@ -107,6 +145,8 @@
             margin-bottom: 2.5rem;
             color: var(--secondary);
             letter-spacing: 0.01em;
+            opacity: 0;
+            animation: loadUp 0.8s ease 0.1s forwards;
         }
         
         .hero .description {
@@ -116,6 +156,8 @@
             color: var(--secondary);
             max-width: 650px;
             letter-spacing: 0.01em;
+            opacity: 0;
+            animation: loadUp 0.8s ease 0.2s forwards;
         }
         
         .hero-metrics {
@@ -125,10 +167,8 @@
             margin-top: 4rem;
             padding-top: 3rem;
             border-top: 1px solid var(--border);
-        }
-        
-        .metric {
-            text-align: left;
+            opacity: 0;
+            animation: loadUp 0.8s ease 0.3s forwards;
         }
         
         .metric-value {
@@ -146,10 +186,11 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
-        
+
+        /* --- SKILLS --- */
         .skills {
             padding: 3rem 3rem;
-            background: var(--light-bg);
+            background: var(--surface);
             border-bottom: 1px solid var(--border);
         }
         
@@ -162,19 +203,24 @@
         }
         
         .skill-badge {
-            background: var(--white);
+            background: var(--bg);
             padding: 0.5rem 1rem;
             border: 1px solid var(--border);
+            border-radius: 50px;
             font-size: 10px;
             font-weight: 300;
             color: var(--secondary);
-            letter-spacing: 0.05em;
             text-transform: uppercase;
+            transition: all 0.2s ease;
         }
-        
-        section {
-            padding: 5rem 3rem;
+
+        .skill-badge:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
         }
+
+        /* --- PROJECTS --- */
+        section { padding: 5rem 3rem; }
         
         .container {
             max-width: 1400px;
@@ -193,21 +239,23 @@
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 1px;
-            background: var(--border);
-            border: 1px solid var(--border);
+            gap: 2rem;
         }
         
         .project-card {
-            background: var(--white);
+            background: var(--bg);
             padding: 3rem;
-            transition: background 0.2s, transform 0.2s;
+            border: 1px solid var(--border);
+            transition: all 0.4s var(--ease);
             cursor: pointer;
+            position: relative;
         }
         
         .project-card:hover {
-            background: var(--light-bg);
-            transform: translateY(-2px);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.05);
+            border-color: #d1d1d1;
+            z-index: 2;
         }
         
         .project-header {
@@ -268,9 +316,7 @@
             border-bottom: 1px solid var(--border);
         }
         
-        .stat {
-            text-align: center;
-        }
+        .stat { text-align: center; }
         
         .stat-value {
             font-family: 'JetBrains Mono', monospace;
@@ -294,26 +340,31 @@
         }
         
         .tag {
-            background: transparent;
-            border: 1px solid var(--border);
+            background: var(--surface);
+            border: 1px solid transparent;
             padding: 0.3rem 0.8rem;
             font-size: 9px;
             color: var(--secondary);
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            font-weight: 300;
+            font-weight: 400;
+            transition: all 0.2s;
         }
-        
+
+        .project-card:hover .tag {
+            background: var(--bg);
+            border-color: var(--border);
+        }
+
+        /* --- CONTACT --- */
         .contact {
-            background: var(--light-bg);
+            background: var(--surface);
             border-top: 1px solid var(--border);
             padding: 5rem 3rem;
+            text-align: center;
         }
         
-        .contact .container {
-            text-align: center;
-            max-width: 700px;
-        }
+        .contact .container { max-width: 700px; }
         
         .contact p {
             font-size: 13px;
@@ -331,34 +382,25 @@
         }
         
         .contact-btn {
-            background: transparent;
+            background: var(--bg);
             color: var(--primary);
             padding: 1rem 2rem;
             border: 1px solid var(--border);
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 300;
             font-size: 11px;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            transition: all 0.2s;
+            transition: all 0.3s var(--ease);
         }
         
         .contact-btn:hover {
-            background: var(--primary);
-            color: var(--white);
+            transform: translateY(-2px);
             border-color: var(--primary);
         }
-        
-        footer {
-            background: var(--primary);
-            color: var(--white);
-            text-align: center;
-            padding: 2rem;
-            font-size: 10px;
-            font-weight: 300;
-            letter-spacing: 0.05em;
-        }
-        
+
+        /* --- MODAL --- */
         .modal {
             display: none;
             position: fixed;
@@ -366,45 +408,52 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
             z-index: 1000;
             overflow-y: auto;
-            padding: 3rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         .modal.active {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
+            opacity: 1;
         }
         
         .modal-content {
-            background: var(--white);
+            background: var(--bg);
             border: 1px solid var(--border);
             padding: 4rem;
             max-width: 900px;
-            width: 100%;
-            margin-top: 3rem;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
             position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            transform: translateY(20px);
+            transition: transform 0.4s var(--ease);
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
         }
         
         .modal-close {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
+            position: sticky;
+            top: 0;
+            float: right;
             font-size: 24px;
             cursor: pointer;
             color: var(--secondary);
             background: none;
             border: none;
-            font-weight: 200;
-            transition: color 0.2s;
+            z-index: 10;
         }
         
-        .modal-close:hover {
-            color: var(--primary);
-        }
+        .modal-close:hover { color: var(--accent); }
         
         .modal-title {
             font-size: 28px;
@@ -416,9 +465,7 @@
             border-bottom: 1px solid var(--border);
         }
         
-        .modal-section {
-            margin-bottom: 3rem;
-        }
+        .modal-section { margin-bottom: 3rem; }
         
         .modal-section h3 {
             color: var(--primary);
@@ -429,23 +476,16 @@
             text-transform: uppercase;
         }
         
-        .modal-section p {
+        .modal-section p, .modal-section li {
             font-size: 13px;
             line-height: 1.8;
             color: var(--secondary);
             font-weight: 300;
         }
         
-        .modal-section ul {
-            list-style: none;
-            padding-left: 0;
-        }
+        .modal-section ul { padding-left: 0; list-style: none; }
         
         .modal-section li {
-            font-size: 13px;
-            line-height: 1.8;
-            color: var(--secondary);
-            font-weight: 300;
             padding-left: 1.5rem;
             position: relative;
             margin-bottom: 0.5rem;
@@ -459,59 +499,28 @@
         }
         
         .highlight-box {
-            background: var(--light-bg);
+            background: var(--surface);
             border: 1px solid var(--border);
             padding: 2rem;
             margin: 2rem 0;
         }
+
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
         
         @media (max-width: 768px) {
-            nav {
-                padding: 1rem 1.5rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .nav-links {
-                gap: 1.5rem;
-            }
-            
-            .hero {
-                padding: 5rem 1.5rem 4rem;
-            }
-            
-            .hero h1 {
-                font-size: 32px;
-            }
-            
-            section {
-                padding: 3rem 1.5rem;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .project-card {
-                padding: 2rem;
-            }
-            
-            .modal {
-                padding: 1rem;
-            }
-            
-            .modal-content {
-                padding: 2rem 1.5rem;
-                margin-top: 1rem;
-            }
-            
-            .project-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero-metrics {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .hero h1 { font-size: 42px; flex-wrap: wrap; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .modal-content { padding: 2rem 1.5rem; }
+            .hero-metrics { grid-template-columns: repeat(2, 1fr); }
+            nav { flex-direction: column; gap: 1rem; }
         }
     </style>
 </head>
@@ -529,7 +538,9 @@
 
     <section class="hero" id="about">
         <div class="hero-content">
-            <h1>Aarna Shrimali</h1>
+            <h1>
+                <span>a</span><span>a</span><span>r</span><span>n</span><span>a</span><span>a</span>
+            </h1>
             <p class="subtitle">Architecture Student · Graphic Designer · Spatial Thinker</p>
             <p class="description">
                 Student at the <span style="color: var(--primary); border-bottom: 1px solid var(--border);">School of Planning and Architecture, Bhopal</span>, 
@@ -556,7 +567,7 @@
         </div>
     </section>
 
-    <section class="skills">
+    <section class="skills reveal">
         <div class="skills-container">
             <span class="skill-badge">Revit</span>
             <span class="skill-badge">AutoCAD</span>
@@ -573,10 +584,10 @@
 
     <section id="projects">
         <div class="container">
-            <h2 class="section-title">Selected Works</h2>
+            <h2 class="section-title reveal">Selected Works</h2>
             
             <div class="projects-grid">
-                <div class="project-card" onclick="openModal('phc')">
+                <div class="project-card reveal" onclick="openModal('phc')">
                     <div class="project-header">
                         <span class="project-number">01</span>
                         <span class="project-year">2025</span>
@@ -587,22 +598,8 @@
                         Reimagining the PHC as an environment where the emotional weight of waiting is softened through architecture. 
                         A design guided by psychological ease and functional clarity.
                     </p>
-                    
                     <div class="project-stats">
-                        <div class="stat">
-                            <div class="stat-value">Spatial Ethos</div>
-                            <div class="stat-label">Height-gradient system</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">Passive</div>
-                            <div class="stat-label">Cooling</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">3</div>
-                            <div class="stat-label">Zones</div>
-                        </div>
                     </div>
-                    
                     <div class="project-tags">
                         <span class="tag">Healthcare</span>
                         <span class="tag">Psychology</span>
@@ -611,7 +608,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" onclick="openModal('nsa')">
+                <div class="project-card reveal" onclick="openModal('nsa')">
                     <div class="project-header">
                         <span class="project-number">02</span>
                         <span class="project-year">Summer 2025</span>
@@ -622,7 +619,6 @@
                         Summer internship focusing on technical documentation and 3D visualization. 
                         Assisted in the modelling of two major architectural projects using software workflows.
                     </p>
-                    
                     <div class="project-stats">
                         <div class="stat">
                             <div class="stat-value">2</div>
@@ -637,7 +633,6 @@
                             <div class="stat-label">Experience</div>
                         </div>
                     </div>
-                    
                     <div class="project-tags">
                         <span class="tag">Professional Practice</span>
                         <span class="tag">3D Modelling</span>
@@ -645,7 +640,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" onclick="openModal('graphic')">
+                <div class="project-card reveal" onclick="openModal('graphic')">
                     <div class="project-header">
                         <span class="project-number">03</span>
                         <span class="project-year">2020-Present</span>
@@ -656,7 +651,6 @@
                         Over 5 years of experience as a freelance graphic designer. 
                         Creating visual identities, branding materials, murals and digital assets while pursuing architectural studies.
                     </p>
-                    
                     <div class="project-stats">
                         <div class="stat">
                             <div class="stat-value">5+</div>
@@ -671,7 +665,6 @@
                             <div class="stat-label">Media</div>
                         </div>
                     </div>
-                    
                     <div class="project-tags">
                         <span class="tag">Graphic Design</span>
                         <span class="tag">Freelance</span>
@@ -679,7 +672,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" onclick="openModal('coding')">
+                <div class="project-card reveal" onclick="openModal('coding')">
                     <div class="project-header">
                         <span class="project-number">04</span>
                         <span class="project-year">Personal</span>
@@ -689,7 +682,6 @@
                     <p class="project-description">
                         Exploring generative design and interactive visuals through code. A series of experiments built with p5.js.
                     </p>
-                    
                     <div class="project-tags">
                         <span class="tag">JavaScript</span>
                         <span class="tag">p5.js</span>
@@ -697,7 +689,7 @@
                     </div>
                 </div>
 
-                 <div class="project-card" onclick="openModal('extra')">
+                 <div class="project-card reveal" onclick="openModal('extra')">
                     <div class="project-header">
                         <span class="project-number">05</span>
                         <span class="project-year">Ongoing</span>
@@ -707,7 +699,6 @@
                     <p class="project-description">
                         Key leadership roles including Trophy Head and NASA achievements, alongside organizational initiatives like ThinkStartup.
                     </p>
-                    
                     <div class="project-tags">
                         <span class="tag">NASA Top 25</span>
                         <span class="tag">Trophy Head</span>
@@ -715,7 +706,7 @@
                     </div>
                 </div>
 
-                 <div class="project-card" onclick="openModal('interests')">
+                 <div class="project-card reveal" onclick="openModal('interests')">
                     <div class="project-header">
                         <span class="project-number">06</span>
                         <span class="project-year">Creative</span>
@@ -725,14 +716,12 @@
                     <p class="project-description">
                         Explorations in photography, oil painting, and hand-work, alongside competitive sports engagement.
                     </p>
-                    
                     <div class="project-tags">
                         <span class="tag">Photography</span>
                         <span class="tag">Painting</span>
                         <span class="tag">Table Tennis</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -763,32 +752,31 @@
                 <h3>Overview</h3>
                 <p>
                     <strong>Location:</strong> Bhopal, Madhya Pradesh<br>
-                    <strong>Structure:</strong> RCC Frame with Infill Walls<br><br>
-                    "The Well of Time" reimagines the Primary Health Centre (PHC) as an environment where the emotional weight of waiting is softened through architecture. [cite_start]Rather than functioning as a purely clinical institution, the PHC becomes a gentle spatial journey — from compression to expansion to stillness[cite: 40].
+                    "The Well of Time", part of my Semester 3 design project, reimagines the Primary Health Centre (PHC) as an environment where the emotional weight of waiting is softened through architecture. Rather than functioning as a purely clinical institution, the PHC becomes a gentle spatial journey — from compression to expansion to stillness.
                 </p>
             </div>
 
             <div class="highlight-box">
                 <h3>Design Philosophy</h3>
-                <p>The design is guided by two principles: psychological ease and functional clarity. [cite_start]The building is organized around a high, light-filled courtyard, turning it into a calm "time well" that naturally ventilates and anchors the entire plan[cite: 40].</p>
+                <p>The design is guided by two principles: psychological ease and functional clarity. The building is organized around a high, light-filled courtyard, turning it into a calm "time well" that naturally ventilates and anchors the entire plan.</p>
             </div>
 
             <div class="modal-section">
                 <h3>Zoning Strategy</h3>
                 <ul>
-                    [cite_start]<li><strong>Public Zone:</strong> Registration and waiting areas placed at the front, defined by lower ceilings that slow the mind and create a grounded entry[cite: 40].</li>
-                    <li><strong>Shared / Community Zone:</strong> A double-height central courtyard acts as the emotional and climatic core. [cite_start]This is where time "opens up," aided by diffused light and shaded edges[cite: 40].</li>
-                    [cite_start]<li><strong>Clinical / Private Zone:</strong> Consultation rooms and treatment areas occupy the quieter low-height wings, offering a return to comfort, privacy, and stillness[cite: 40].</li>
+                    <li><strong>Public Zone:</strong> Registration and waiting areas placed at the front, defined by lower ceilings that slow the mind and create a grounded entry.</li>
+                    <li><strong>Shared / Community Zone:</strong> A double-height central courtyard acts as the emotional and climatic core. This is where time "opens up," aided by diffused light and shaded edges.</li>
+                    <li><strong>Clinical / Private Zone:</strong> Consultation rooms and treatment areas occupy the quieter low-height wings, offering a return to comfort, privacy, and stillness.</li>
                 </ul>
             </div>
 
             <div class="modal-section">
                 <h3>Key Architectural Features</h3>
                 <ul>
-                    [cite_start]<li><strong>Height as Experience:</strong> The form transitions low → high → low, shaping a psychological gradient from tension to release to calm[cite: 40].</li>
-                    [cite_start]<li><strong>Passive Cooling:</strong> The courtyard works as a stack-ventilation well, drawing cool air through shaded corridors and releasing warm air upward[cite: 40].</li>
-                    [cite_start]<li><strong>Light Control:</strong> A subtle clerestory band with perforations brings in soft, non-glare daylight[cite: 40].</li>
-                    [cite_start]<li><strong>Materiality:</strong> Locally available stone, brick, and exposed concrete to create a robust, low-maintenance public building with culturally familiar tactile quality[cite: 40].</li>
+                    <li><strong>Height as Experience:</strong> The form transitions low → high → low, shaping a psychological gradient from tension to release to calm.</li>
+                    <li><strong>Passive Cooling:</strong> The courtyard works as a stack-ventilation well, drawing cool air through shaded corridors and releasing warm air upward.</li>
+                    <li><strong>Light Control:</strong> A subtle clerestory band with perforations brings in soft, non-glare daylight.</li>
+                    <li><strong>Materiality:</strong> Locally available stone, brick, and exposed concrete to create a robust, low-maintenance public building with culturally familiar tactile quality.</li>
                 </ul>
             </div>
         </div>
@@ -824,7 +812,7 @@
             <div class="modal-section">
                 <h3>Experience</h3>
                 <p>
-                   With over 5 years of experience (September 2020 - Present), I have worked as a self-employed graphic designer alongside my architectural studies. [cite_start]This dual-discipline approach allows me to understand composition, hierarchy, and visual communication at both 2D and 3D scales[cite: 10, 12, 13, 14].
+                   With over 5 years of experience (September 2020 - Present), I have worked as a self-employed graphic designer alongside my architectural studies. This dual-discipline approach allows me to understand composition, hierarchy, and visual communication at both 2D and 3D scales.
                 </p>
             </div>
             
@@ -872,10 +860,10 @@
                 <ul>
                     <li><strong>Trophy Head (WAT & GSEN):</strong> Leading college teams for prestigious design competitions, coordinating design strategy and submission logistics.</li>
                     <li><strong>Architecture Brio Insider Program:</strong> Selected for this competitive mentorship program under NASA, engaging with industry leaders.</li>
-                    [cite_start]<li><strong>ThinkStartup Internship (2023):</strong> Interned for 5 months, playing a key role in the Youth Ideathon 2023 organizing committee[cite: 32, 34, 35].</li>
-                    [cite_start]<li><strong>MoE's Innovation Cell:</strong> Spearheaded the "Passion Projects" initiative to integrate student-led research into the curriculum[cite: 27, 30].</li>
-                    <li><strong>TedEd Club:</strong> Delivered two Ted-Ed talks in high school. [cite_start]Active speaker and organizer[cite: 18, 19].</li>
-                     [cite_start]<li><strong>Good Earth Enterprise:</strong> Served as General Manager for 1 year, overseeing operations and team coordination[cite: 21, 23, 24].</li>
+                    <li><strong>TedEd Club:</strong> Delivered two Ted-Ed talks in high school. Active speaker and organizer.</li>
+                    <li><strong>MoE's Innovation Cell:</strong> Spearheaded the "Passion Projects" initiative to integrate student-led research into the curriculum.</li>
+                    <li><strong>ThinkStartup Internship (2023):</strong> Interned for 5 months, playing a key role in the Youth Ideathon 2023 organizing committee.</li>
+                    <li><strong>Good Earth Enterprise:</strong> Served as General Manager for 1 year, overseeing operations and team coordination.</li>
                 </ul>
             </div>
         </div>
@@ -887,17 +875,17 @@
             <h2 class="modal-title">Creative Interests & Athletics</h2>
             
             <div class="modal-section">
-                <h3>Fine Arts & Craft</h3>
+                <h3>Documentation</h3>
                 <ul>
                     <li><strong>Photography:</strong> Exploring architectural composition and light through the lens.</li>
                     <li><strong>Oil Painting:</strong> Focusing on texture, color theory, and abstract expressionism.</li>
-                    <li><strong>Hand Work:</strong> Skilled in model making and tactile crafts.</li>
+                    <li><strong>Sketching:</strong> Various mediums such as charcoal, watercolor.</li>
                 </ul>
 
                 <h3>Athletics</h3>
                 <ul>
-                    <li><strong>Table Tennis:</strong> Competitive player, participating in inter-college tournaments.</li>
-                    <li><strong>Tennis:</strong> Active enthusiast.</li>
+                    <li><strong>Table Tennis:</strong> Competitive player.</li>
+                    <li><strong>Tennis, Football:</strong> Active enthusiast.</li>
                 </ul>
             </div>
         </div>
@@ -942,6 +930,19 @@
                     });
                 }
             });
+        });
+
+        // Simple Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
         });
     </script>
 </body>
