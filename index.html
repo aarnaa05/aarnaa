@@ -54,14 +54,18 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION (UPDATED FOR TRANSLUCENCY) --- */
         header {
-            background: rgba(255, 255, 255, 0.85);
+            /* Lower opacity (0.7) makes it see-through */
+            background: rgba(255, 255, 255, 0.7);
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(12px);
+            /* Stronger blur for "frosted glass" effect */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); /* For Safari */
+            transition: background 0.3s ease;
         }
         
         nav {
@@ -505,7 +509,26 @@
             margin: 2rem 0;
         }
 
-        /* VIDEO STYLES */
+        /* --- VIDEO STYLING --- */
+        .project-img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+            display: block;
+        }
+
+        .caption {
+            font-size: 11px;
+            color: var(--secondary);
+            text-align: center;
+            margin-top: -0.5rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
         .video-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
