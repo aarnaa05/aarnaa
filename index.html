@@ -54,18 +54,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- NAVIGATION (UPDATED FOR TRANSLUCENCY) --- */
+        /* --- NAVIGATION --- */
         header {
-            /* Lower opacity (0.7) makes it see-through */
             background: rgba(255, 255, 255, 0.7);
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 100;
-            /* Stronger blur for "frosted glass" effect */
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); /* For Safari */
-            transition: background 0.3s ease;
+            -webkit-backdrop-filter: blur(20px);
         }
         
         nav {
@@ -120,7 +117,7 @@
         
         /* --- INTERACTIVE HEADING (THE BOLD EFFECT) --- */
         .hero h1 {
-            font-family: 'Inter', sans-serif; /* Explicitly Inter */
+            font-family: 'Inter', sans-serif;
             font-size: 64px;
             margin-bottom: 1rem;
             color: var(--primary);
@@ -134,11 +131,11 @@
         .hero h1 span {
             display: inline-block;
             transition: transform 0.2s var(--ease), font-weight 0.2s ease, color 0.2s ease;
-            font-weight: 500; /* MEDIUM THICKNESS BASE */
+            font-weight: 500;
         }
 
         .hero h1 span:hover {
-            font-weight: 700; /* SNAPS TO BOLD */
+            font-weight: 700;
             color: var(--accent);
             transform: scale(1.05) translateY(-2px);
         }
@@ -253,6 +250,7 @@
             transition: all 0.4s var(--ease);
             cursor: pointer;
             position: relative;
+            overflow: hidden; /* Keeps image inside borders */
         }
         
         .project-card:hover {
@@ -260,6 +258,24 @@
             box-shadow: 0 15px 30px -10px rgba(0,0,0,0.05);
             border-color: #d1d1d1;
             z-index: 2;
+        }
+
+        /* Hover Cover Image Style */
+        .card-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 5;
+            transition: opacity 0.4s var(--ease);
+            opacity: 1; /* Visible by default */
+        }
+
+        .project-card:hover .card-cover {
+            opacity: 0; /* Vanishes on hover */
         }
         
         .project-header {
@@ -509,7 +525,7 @@
             margin: 2rem 0;
         }
 
-        /* --- VIDEO STYLING --- */
+        /* --- IMAGE & VIDEO STYLING --- */
         .project-img {
             width: 100%;
             height: auto;
@@ -602,10 +618,10 @@
             </h1>
             <p class="subtitle">Architecture Student · Graphic Designer · Spatial Thinker</p>
             <p class="description">
-                (Born 29/05/06). Student at the <span style="color: var(--primary); border-bottom: 1px solid var(--border);">School of Planning and Architecture, Bhopal</span>, 
-                driven by curiosity and a love for systems, patterns, and meaningful spatial experiences. My work moves between concept, research, and digital experimentation, often exploring sensory architecture, cultural narratives, and generative design.
+                Hello!<br> I am Aarna Shrimali, student at <span style="color: var(--primary); border-bottom: 1px solid var(--border);">School of Planning and Architecture, Bhopal</span>, 
+                driven by curiosity and a love for systems, patterns, and meaningful spatial experiences.
                 Freelancing in graphic design and murals since school has shaped my visual language and strengthened my instinct for storytelling and detail. I’m drawn to architecture that is thoughtful and quietly inventive.
-                Generally, apart from design and architecture, I enjoy playing tennis and watching movies.
+                Generally, apart from design and architecture, I enjoy playing tennis and listening to music.
                 <br><br>
                 <a href="Profile (1).pdf" target="_blank" style="color: var(--primary); text-decoration: underline; text-decoration-color: var(--border); font-weight: 400;">View Resume (PDF) →</a>
             </p>
@@ -614,6 +630,7 @@
                 <div class="metric">
                     <div class="metric-value">2024</div>
                     <div class="metric-label">Secondary Education</div>
+                    <div class="metric-label">Choithram School, Indore</div>
                 </div>
                 <div class="metric">
                     <div class="metric-value">2029</div>
@@ -637,6 +654,7 @@
             <span class="skill-badge">English (Native)</span>
             <span class="skill-badge">French (Elementary)</span>            
             <span class="skill-badge">Public Speaking</span>
+            <span class="skill-badge">p5.js</span>
         </div>
     </section>
 
@@ -646,21 +664,26 @@
             
             <div class="projects-grid">
                 <div class="project-card reveal" onclick="openModal('phc')">
-                    <div class="project-header">
-                        <span class="project-number">01</span>
-                        <span class="project-year">2025</span>
-                    </div>
-                    <h3 class="project-title">The Well of Time</h3>
-                    <p class="project-meta">Bhopal, MP · Healthcare / Public Infrastructure</p>
-                    <p class="project-description">
-                        Reimagining the PHC as an environment where the emotional weight of waiting is softened through architecture. 
-                        A design guided by psychological ease and functional clarity.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Healthcare</span>
-                        <span class="tag">Psychology</span>
-                        <span class="tag">Bhopal</span>
-                        <span class="tag">Climatic Responsive</span>
+                    
+                    <div class="card-cover" style="background-image: url('images/phc cover image.jpg');"></div>
+
+                    <div class="card-content">
+                        <div class="project-header">
+                            <span class="project-number">01</span>
+                            <span class="project-year">2025</span>
+                        </div>
+                        <h3 class="project-title">The Well of Time</h3>
+                        <p class="project-meta">Bhopal, MP · Healthcare / Public Infrastructure</p>
+                        <p class="project-description">
+                            Reimagining the PHC as an environment where the emotional weight of waiting is softened through architecture. 
+                            A design guided by psychological ease and functional clarity.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Healthcare</span>
+                            <span class="tag">Psychology</span>
+                            <span class="tag">Bhopal</span>
+                            <span class="tag">Climatic Responsive</span>
+                        </div>
                     </div>
                 </div>
 
@@ -799,7 +822,7 @@
                         <span class="project-year">Creative</span>
                     </div>
                     <h3 class="project-title">Creative & Personal</h3>
-                    <p class="project-meta">Art · Photography · Athletics</p>
+                    <p class="project-meta">Fine Arts · Athletics</p>
                     <p class="project-description">
                         Explorations in photography, oil painting, and hand-work, alongside competitive sports engagement.
                     </p>
@@ -946,7 +969,7 @@
             <h2 class="modal-title">Algorithmic Explorations: Creative Coding</h2>
             
             <div class="modal-section">
-                <p>Exploring the intersection of logic and aesthetics through code. These projects were built using the p5.js library, focusing on generative patterns and interactive visuals.</p>
+                <p>Exploring "Chaos Equations" in mathematics visually through generative code. These projects were built using the p5.js library.</p>
                 <h3>Experiments</h3>
                 <ul>
                     <li><strong>Generative Patterns:</strong> Algorithms that create unique visual textures with every reload.</li>
@@ -1007,7 +1030,7 @@
                 <h3>Documentation</h3>
                 <ul>
                     <li><strong>Photography:</strong> Exploring architectural composition and light through the lens.</li>
-                    <li><strong>Oil Painting:</strong> Focusing on texture, color theory, and abstract expressionism (Learnt from my mother).</li>
+                    <li><strong>Oil Painting:</strong> Focusing on texture, color theory, and abstract expressionism <em>which I learnt from my mother.</em>.</li>
                     <li><strong>Sketching:</strong> Various mediums such as charcoal, watercolor.</li>
                 </ul>
 
