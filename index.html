@@ -553,6 +553,17 @@
             display: block;
         }
 
+        /* NEW: Zoomable styling for Well of Time images */
+        .zoomable {
+            cursor: zoom-in;
+            transition: transform 0.2s;
+        }
+        
+        .zoomable:hover {
+            transform: scale(1.02);
+            border-color: var(--primary);
+        }
+
         .caption {
             font-size: 11px;
             color: var(--secondary);
@@ -594,6 +605,37 @@
             margin-top: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+        }
+
+        /* --- LIGHTBOX OVERLAY --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000; /* Higher than modal (1000) */
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         footer {
@@ -902,6 +944,10 @@
         <p>© 2025 Aarna Shrimali</p>
     </footer>
 
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Fullscreen View">
+    </div>
+
     <div id="phcModal" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('phc')">&times;</button>
@@ -918,11 +964,11 @@
 
             <div class="image-grid">
                 <div>
-                    <img src="images/elevation with tree.png" class="grid-img" alt="Elevation with Tree">
+                    <img src="images/elevation with tree.png" class="grid-img zoomable" onclick="openLightbox(this.src)" alt="Elevation with Tree">
                     <p class="caption">Elevation</p>
                 </div>
                 <div>
-                    <img src="images/section with tree.png" class="grid-img" alt="Section with Tree">
+                    <img src="images/section with tree.png" class="grid-img zoomable" onclick="openLightbox(this.src)" alt="Section with Tree">
                     <p class="caption">Section</p>
                 </div>
             </div>
@@ -1166,6 +1212,25 @@
             const modal = document.getElementById(project + 'Modal');
             if(modal) {
                 modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        // --- LIGHTBOX FUNCTIONS (Added per request) ---
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling bg
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            // Check if a modal is open before re-enabling scroll
+            const activeModal = document.querySelector('.modal.active');
+            if (!activeModal) {
                 document.body.style.overflow = 'auto';
             }
         }
