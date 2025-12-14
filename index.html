@@ -115,12 +115,12 @@
             margin: 0 auto;
         }
 
-        /* Profile Photo Style - UPDATED TO SQUARE WITH CURVED CORNERS */
+        /* Profile Photo Style - UPDATED SIZE */
         .profile-photo {
-            width: 120px; 
-            height: 120px;
+            width: 160px; /* Increased Size */
+            height: 160px; /* Increased Size */
             object-fit: cover; 
-            border-radius: 12px; /* Changed from 50% to 12px for curved square */
+            border-radius: 12px;
             margin-bottom: 1.5rem; 
             border: 1px solid var(--border);
             opacity: 0;
@@ -1099,7 +1099,19 @@
                 <h3>Experience</h3>
                 <p>
                    With over 5 years of experience (September 2020 - Present), I have worked as a self-employed graphic designer alongside my architectural studies. This dual-discipline approach allows me to understand composition, hierarchy, and visual communication at both 2D and 3D scales.
+                   <br><br>
+                   <strong>Recent Commission:</strong> Visual identity and event collateral commissioned by the <strong>Indian Institute of Interior Designers (IIID), Indore Chapter</strong>.
                 </p>
+            </div>
+
+            <div class="modal-section">
+                <h3>IIID Commission Work</h3>
+                <div class="image-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <img src="images/japan.jpg" class="grid-img zoomable" onclick="openLightbox(this.src)" alt="Japan Theme">
+                    <img src="images/wc.jpg" class="grid-img zoomable" onclick="openLightbox(this.src)" alt="IIID Work 1">
+                    <img src="images/wc2.jpg" class="grid-img zoomable" onclick="openLightbox(this.src)" alt="IIID Work 2">
+                    <img src="images/wc3.jpg" class="grid-img zoomable" onclick="openLightbox(this.src)" alt="IIID Work 3">
+                </div>
             </div>
             
             <div class="modal-section">
@@ -1203,6 +1215,15 @@
                     <li><strong>Oil Painting:</strong> Focusing on texture, color theory, and abstract expressionism which I learnt from my mother.</li>
                     <li><strong>Sketching:</strong> Various mediums such as charcoal, watercolor.</li>
                 </ul>
+
+                <h3>Photography</h3>
+                <p>Exploring architectural composition, street life, and light through the lens.</p>
+                <div class="image-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <img src="images/cig.png" class="grid-img zoomable" onclick="openLightbox(this.src)" alt="Photography 1">
+                    <img src="images/ihc.png" class="grid-img zoomable" onclick="openLightbox(this.src)" alt="Photography 2">
+                    <img src="images/chameleon.png" class="grid-img zoomable" onclick="openLightbox(this.src)" alt="Photography 3">
+                    <img src="images/old.png" class="grid-img zoomable" onclick="openLightbox(this.src)" alt="Photography 4">
+                </div>
 
                 <h3>Athletics</h3>
                 <ul>
