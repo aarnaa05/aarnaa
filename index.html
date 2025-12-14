@@ -114,6 +114,18 @@
             max-width: 900px;
             margin: 0 auto;
         }
+
+        /* Profile Photo Style */
+        .profile-photo {
+            width: 120px; /* Slightly small size */
+            height: 120px;
+            object-fit: cover; /* Ensures image isn't squashed */
+            border-radius: 50%; /* Makes it circular */
+            margin-bottom: 1.5rem; /* Spacing between photo and title */
+            border: 1px solid var(--border); /* Subtle border definition */
+            opacity: 0;
+            animation: loadUp 0.8s ease forwards; /* Loads first */
+        }
         
         /* --- INTERACTIVE HEADING (THE BOLD EFFECT) --- */
         .hero h1 {
@@ -125,7 +137,8 @@
             cursor: default;
             display: flex;
             gap: 1px; 
-            animation: loadUp 0.8s ease forwards;
+            opacity: 0;
+            animation: loadUp 0.8s ease 0.1s forwards; /* Slight delay after photo */
         }
 
         .hero h1 span {
@@ -147,7 +160,7 @@
             color: var(--secondary);
             letter-spacing: 0.01em;
             opacity: 0;
-            animation: loadUp 0.8s ease 0.1s forwards;
+            animation: loadUp 0.8s ease 0.2s forwards;
         }
         
         .hero .description {
@@ -158,7 +171,7 @@
             max-width: 650px;
             letter-spacing: 0.01em;
             opacity: 0;
-            animation: loadUp 0.8s ease 0.2s forwards;
+            animation: loadUp 0.8s ease 0.3s forwards;
         }
         
         .hero-metrics {
@@ -169,7 +182,7 @@
             padding-top: 3rem;
             border-top: 1px solid var(--border);
             opacity: 0;
-            animation: loadUp 0.8s ease 0.3s forwards;
+            animation: loadUp 0.8s ease 0.4s forwards;
         }
         
         .metric-value {
@@ -672,6 +685,8 @@
 
     <section class="hero" id="about">
         <div class="hero-content">
+            <img src="aarna.png" alt="Aarna Shrimali" class="profile-photo">
+
             <h1>
                 <span>a</span><span>a</span><span>r</span><span>n</span><span>a</span><span>a</span>
             </h1>
@@ -745,7 +760,7 @@
                 </div>
 
                 <div class="project-card reveal" onclick="openModal('nsa')">
-                    <div class="card-cover" style="background-image: url('iindian.PNG');"></div>
+                    <div class="card-cover" style="background-image: url('indian 1.jpeg');"></div>
                     <div class="card-content">
                         <div class="project-header">
                             <span class="project-number">02</span>
@@ -800,7 +815,7 @@
                 </div>
 
                 <div class="project-card reveal" onclick="openModal('sparrow')">
-                    <div class="card-cover" style="background-image: url('bbird.PNG');"></div>
+                    <div class="card-cover" style="background-image: url('bird 1.jpeg');"></div>
                     <div class="card-content">
                         <div class="project-header">
                             <span class="project-number">04</span>
@@ -834,7 +849,7 @@
                 </div>
 
                 <div class="project-card reveal" onclick="openModal('graphic')">
-                    <div class="card-cover" style="background-image: url('eeye.PNG');"></div>
+                    <div class="card-cover" style="background-image: url('eye 1.jpeg');"></div>
                     <div class="project-header">
                         <span class="project-number">05</span>
                         <span class="project-year">2020-Present</span>
@@ -907,7 +922,7 @@
                 </div>
 
                  <div class="project-card reveal" onclick="openModal('firstyear')">
-                     <div class="card-cover" style="background-image: url('iindian 2.PNG');"></div>
+                     <div class="card-cover" style="background-image: url('indian 2 1.jpeg');"></div>
                      <div class="project-header">
                          <span class="project-number">08</span>
                          <span class="project-year">2024-25</span>
