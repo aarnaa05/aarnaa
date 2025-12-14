@@ -3,249 +3,1274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aarna | Architecture Portfolio</title>
+    <title>Aarna Shrimali · Architecture & Design Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        /* --- General Reset & Typography --- */
+        /* RESET & BASICS */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
+        :root {
+            --primary: #050505;
+            --secondary: #666666;
+            --accent: #E60000;
+            --bg: #FFFFFF;
+            --border: #E5E5E5;
+            --surface: #FAFAFA;
+            /* Framer-like Spring Easing */
+            --ease: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* --- Header / Hero Section --- */
-        header {
-            text-align: center;
-            padding: 4rem 1rem;
-            background-color: #fff;
-            margin-bottom: 2rem;
-        }
-
-        .profile-photo {
-            width: 120px;       /* Keeps the photo from being too huge */
-            height: 120px;
-            object-fit: cover;  /* Ensures the image doesn't stretch */
-            border-radius: 50%; /* Makes it circular */
-            margin-bottom: 1rem;
-            border: 2px solid #eee;
-        }
-
-        h1 {
-            font-size: 2.5rem;
+            font-family: 'Inter', -apple-system, sans-serif;
+            font-size: 14px;
             font-weight: 300;
-            letter-spacing: 2px;
-            margin-bottom: 0.5rem;
-            text-transform: lowercase; /* Stylistic choice for "aarnaa" */
+            line-height: 1.6;
+            color: var(--primary);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        .subtitle {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 1.5rem;
+        /* --- ANIMATION UTILITIES --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        .social-links a {
-            margin: 0 10px;
-            font-size: 0.9rem;
-            border-bottom: 1px solid #333;
-            padding-bottom: 2px;
-            transition: all 0.3s ease;
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .social-links a:hover {
-            color: #888;
-            border-bottom-color: #888;
+        @keyframes loadUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Portfolio Grid --- */
-        .container {
-            max-width: 1200px;
+        /* --- NAVIGATION --- */
+        header {
+            background: rgba(255, 255, 255, 0.7);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        nav {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 40px;
-            padding-bottom: 4rem;
-        }
-
-        .card {
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-bottom: 1px solid #eee;
-        }
-
-        .card-content {
-            padding: 20px;
-        }
-
-        .card-category {
-            font-size: 0.75rem;
+        
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--primary);
+            letter-spacing: 0.05em;
             text-transform: uppercase;
-            color: #888;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-            display: block;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 11px;
+            font-weight: 400;
+            transition: color 0.2s;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
         }
 
-        .card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 10px;
+        /* --- HERO SECTION --- */
+        .hero {
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            padding: 8rem 3rem 6rem;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* --- INTERACTIVE HEADING (THE BOLD EFFECT) --- */
+        .hero h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 64px;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            line-height: 1;
+            cursor: default;
+            display: flex;
+            gap: 1px; 
+            animation: loadUp 0.8s ease forwards;
+        }
+
+        .hero h1 span {
+            display: inline-block;
+            transition: transform 0.2s var(--ease), font-weight 0.2s ease, color 0.2s ease;
             font-weight: 500;
         }
 
-        .card p {
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 15px;
+        .hero h1 span:hover {
+            font-weight: 700;
+            color: var(--accent);
+            transform: scale(1.05) translateY(-2px);
+        }
+        
+        .hero .subtitle {
+            font-size: 15px;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            color: var(--secondary);
+            letter-spacing: 0.01em;
+            opacity: 0;
+            animation: loadUp 0.8s ease 0.1s forwards;
+        }
+        
+        .hero .description {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--secondary);
+            max-width: 650px;
+            letter-spacing: 0.01em;
+            opacity: 0;
+            animation: loadUp 0.8s ease 0.2s forwards;
+        }
+        
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            opacity: 0;
+            animation: loadUp 0.8s ease 0.3s forwards;
+        }
+        
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .metric-label {
+            font-size: 10px;
+            font-weight: 300;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
-        .tags span {
-            display: inline-block;
-            background: #eee;
-            padding: 4px 8px;
+        /* --- SKILLS --- */
+        .skills {
+            padding: 3rem 3rem;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .skills-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .skill-badge {
+            background: var(--bg);
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: 300;
+            color: var(--secondary);
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+
+        .skill-badge:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* --- PROJECTS --- */
+        section { padding: 5rem 3rem; }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 10px;
+            color: var(--secondary);
+            margin-bottom: 4rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: var(--bg);
+            padding: 3rem;
+            border: 1px solid var(--border);
+            transition: all 0.4s var(--ease);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden; /* Keeps image inside borders */
+        }
+        
+        .project-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.05);
+            border-color: #d1d1d1;
+            z-index: 2;
+        }
+
+        /* Hover Cover Image Style */
+        .card-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 5;
+            transition: opacity 0.4s var(--ease);
+            opacity: 1; /* Visible by default */
+        }
+
+        .project-card:hover .card-cover {
+            opacity: 0; /* Vanishes on hover */
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .project-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 300;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+        }
+        
+        .project-year {
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+        }
+        
+        .project-title {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+        }
+        
+        .project-meta {
+            color: var(--secondary);
+            font-size: 11px;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.01em;
+        }
+        
+        .project-description {
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 13px;
+            font-weight: 300;
+        }
+        
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stat { text-align: center; }
+        
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 22px;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .stat-label {
+            font-size: 9px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            background: var(--surface);
+            border: 1px solid transparent;
+            padding: 0.3rem 0.8rem;
+            font-size: 9px;
+            color: var(--secondary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 400;
+            transition: all 0.2s;
+        }
+
+        .project-card:hover .tag {
+            background: var(--bg);
+            border-color: var(--border);
+        }
+
+        /* --- CONTACT --- */
+        .contact {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 5rem 3rem;
+            text-align: center;
+        }
+        
+        .contact .container { max-width: 700px; }
+        
+        .contact p {
+            font-size: 13px;
+            color: var(--secondary);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+        
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .contact-btn {
+            background: var(--bg);
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s var(--ease);
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        /* --- MODAL --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 4rem;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            transform: translateY(20px);
+            transition: transform 0.4s var(--ease);
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-close {
+            position: sticky;
+            top: 0;
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--secondary);
+            background: none;
+            border: none;
+            z-index: 10;
+        }
+        
+        .modal-close:hover { color: var(--accent); }
+        
+        .modal-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .modal-section { margin-bottom: 3rem; }
+        
+        .modal-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        .modal-section p, .modal-section li {
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--secondary);
+            font-weight: 300;
+        }
+        
+        .modal-section ul { padding-left: 0; list-style: none; }
+        
+        .modal-section li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-section li:before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        
+        .highlight-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* --- IMAGE & VIDEO STYLING --- */
+        .project-img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+            display: block;
+        }
+
+        /* Styling for the small image grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid-img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            display: block;
+        }
+
+        /* NEW: Zoomable styling for Well of Time images */
+        .zoomable {
+            cursor: zoom-in;
+            transition: transform 0.2s;
+        }
+        
+        .zoomable:hover {
+            transform: scale(1.02);
+            border-color: var(--primary);
+        }
+
+        .caption {
+            font-size: 11px;
+            color: var(--secondary);
+            text-align: center;
+            margin-top: -0.5rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            background: #000;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-caption {
+            font-size: 10px;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* --- LIGHTBOX OVERLAY --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000; /* Higher than modal (1000) */
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
             border-radius: 4px;
-            font-size: 0.75rem;
-            margin-right: 5px;
-            color: #555;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
 
-        /* --- Footer --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         footer {
+            background: var(--primary);
+            color: var(--white);
             text-align: center;
             padding: 2rem;
-            background: #fff;
-            color: #666;
-            font-size: 0.8rem;
-            margin-top: 2rem;
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
         }
-
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-            h1 {
-                font-size: 2rem;
-            }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 42px; flex-wrap: wrap; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .modal-content { padding: 2rem 1.5rem; }
+            .hero-metrics { grid-template-columns: repeat(2, 1fr); }
+            nav { flex-direction: column; gap: 1rem; }
+            .video-grid, .image-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-
     <header>
-        <img src="aarna.png" alt="Aarna" class="profile-photo">
-        
-        <h1>aarnaa</h1>
-        <p class="subtitle">Architecture Student & Designer | Bhopal, India</p>
-        
-        <div class="social-links">
-            <a href="resume.pdf" target="_blank">Resume</a>
-            <a href="mailto:your-email@example.com">Email</a>
-            <a href="#">LinkedIn</a>
-        </div>
+        <nav>
+            <div class="logo">Aarna Shrimali</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <div class="container">
-        <div class="grid">
+    <section class="hero" id="about">
+        <div class="hero-content">
+            <h1>
+                <span>a</span><span>a</span><span>r</span><span>n</span><span>a</span><span>a</span>
+            </h1>
+            <p class="subtitle">Architecture Student · Graphic Designer · Spatial Thinker</p>
+            <p class="description">
+                (Born 29/05/06). Student at the <span style="color: var(--primary); border-bottom: 1px solid var(--border);">School of Planning and Architecture, Bhopal</span>, 
+                driven by curiosity and a love for systems, patterns, and meaningful spatial experiences. My work moves between concept, research, and digital experimentation, often exploring sensory architecture, cultural narratives, and generative design.
+                Freelancing in graphic design and murals since school has shaped my visual language and strengthened my instinct for storytelling and detail. I’m drawn to architecture that is thoughtful and quietly inventive.
+                Generally, apart from design and architecture, I enjoy playing tennis and watching movies.
+                <br><br>
+                <a href="Profile (1).pdf" target="_blank" style="color: var(--primary); text-decoration: underline; text-decoration-color: var(--border); font-weight: 400;">View Resume (PDF) →</a>
+            </p>
+            
+            <div class="hero-metrics">
+                <div class="metric">
+                    <div class="metric-value">2024</div>
+                    <div class="metric-label">Secondary Education</div>
+                    <div class="metric-label">Choithram School, Indore</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">2029</div>
+                    <div class="metric-label">Bachelor of Architecture</div>
+                    <div class="metric-label">School of Planning and Architecture, Bhopal</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <article class="card">
-                <img src="phc.jpg" alt="Primary Health Centre Model" class="card-image">
-                <div class="card-content">
-                    <span class="card-category">Healthcare / Public Infrastructure</span>
-                    <h3>The Well of Time</h3>
-                    <p>Primary Health Centre design in Bhopal featuring a central courtyard for passive cooling and community healing.</p>
-                    <div class="tags">
-                        <span>Academic</span>
-                        <span>Design</span>
+    <section class="skills reveal">
+        <div class="skills-container">
+            <span class="skill-badge">Revit</span>
+            <span class="skill-badge">AutoCAD</span>
+            <span class="skill-badge">Rhino 3D</span>
+            <span class="skill-badge">Creative Coding</span>
+            <span class="skill-badge">Morse Code</span>
+            <span class="skill-badge">Graphic Design</span>
+            <span class="skill-badge">Adobe Creative Suite</span>
+            <span class="skill-badge">Hindi (Native)</span>
+            <span class="skill-badge">English (Native)</span>
+            <span class="skill-badge">French (Elementary)</span>            
+            <span class="skill-badge">Public Speaking</span>
+            <span class="skill-badge">p5.js</span> 
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title reveal">Selected Works</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card reveal" onclick="openModal('phc')">
+                    <div class="card-cover" style="background-image: url('images/phc cover image.png');"></div>
+                    <div class="card-content">
+                        <div class="project-header">
+                            <span class="project-number">01</span>
+                            <span class="project-year">2025</span>
+                        </div>
+                        <h3 class="project-title">The Well of Time</h3>
+                        <p class="project-meta">Bhopal, MP · Healthcare / Public Infrastructure</p>
+                        <p class="project-description">
+                            Reimagining the PHC as an environment where the emotional weight of waiting is softened through architecture. 
+                            A design guided by psychological ease and functional clarity.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Healthcare</span>
+                            <span class="tag">Psychology</span>
+                            <span class="tag">Bhopal</span>
+                            <span class="tag">Climatic Responsive</span>
+                        </div>
                     </div>
                 </div>
-            </article>
 
-            <article class="card">
-                <img src="indian.PNG" alt="NSA+ Internship Work" class="card-image">
-                <div class="card-content">
-                    <span class="card-category">Internship Experience</span>
-                    <h3>NSA+ Summer Internship</h3>
-                    <p>Summer 2025. Assisted in 3D modeling and visualization for two major commercial projects.</p>
-                    <div class="tags">
-                        <span>Professional</span>
-                        <span>3D Modeling</span>
+                <div class="project-card reveal" onclick="openModal('nsa')">
+                    <div class="card-cover" style="background-image: url('images/plus.png');"></div>
+                    <div class="card-content">
+                        <div class="project-header">
+                            <span class="project-number">02</span>
+                            <span class="project-year">Summer 2025</span>
+                        </div>
+                        <h3 class="project-title">NSA+ Internship</h3>
+                        <p class="project-meta">Architecture Internship · 3D Modelling</p>
+                        <p class="project-description">
+                            Summer internship focusing on technical documentation and 3D visualization. 
+                            Assisted in the modelling of two major architectural projects using software workflows.
+                        </p>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <div class="stat-value">2</div>
+                                <div class="stat-label">Key Projects</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">3D</div>
+                                <div class="stat-label">Modelling</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">Firm</div>
+                                <div class="stat-label">Experience</div>
+                            </div>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">Professional Practice</span>
+                            <span class="tag">3D Modelling</span>
+                            <span class="tag">Collaboration</span>
+                        </div>
                     </div>
                 </div>
-            </article>
 
-            <article class="card">
-                <img src="bird new.PNG" alt="Avian Cohabitation Design" class="card-image">
-                <div class="card-content">
-                    <span class="card-category">Ecological Design</span>
-                    <h3>100 Sparrow: Avian Cohabitation</h3>
-                    <p>Research-based design for swallow habitats in Bhauri, Bhopal, focusing on human-bird coexistence.</p>
-                    <div class="tags">
-                        <span>Research</span>
-                        <span>Sustainability</span>
+                <div class="project-card reveal" onclick="openModal('coding')">
+                    <div class="card-cover" style="background-image: url('images/stars.png');"></div>
+                    <div class="card-content">
+                        <div class="project-header">
+                            <span class="project-number">03</span>
+                            <span class="project-year">Personal</span>
+                        </div>
+                        <h3 class="project-title">Creative Coding</h3>
+                        <p class="project-meta">Algorithmic Art · p5.js</p>
+                        <p class="project-description">
+                            Exploring "Chaos equations" in mathematics visually through code. These projects were built using the p5.js library.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">p5.js</span>
+                            <span class="tag">Generative Art</span>
+                        </div>
                     </div>
                 </div>
-            </article>
 
-            <article class="card">
-                <img src="eye.PNG" alt="Freelance Graphic Design Work" class="card-image">
-                <div class="card-content">
-                    <span class="card-category">Graphic Design</span>
-                    <h3>Freelance Graphics</h3>
-                    <p>Collection of posters, social media assets, and branding work for university clubs and external clients.</p>
-                    <div class="tags">
-                        <span>Visual Design</span>
-                        <span>Branding</span>
+                <div class="project-card reveal" onclick="openModal('sparrow')">
+                    <div class="card-cover" style="background-image: url('images/bird.png');"></div>
+                    <div class="card-content">
+                        <div class="project-header">
+                            <span class="project-number">04</span>
+                            <span class="project-year">2024</span>
+                        </div>
+                        <h3 class="project-title">100 Sparrow Project</h3>
+                        <p class="project-meta">Academic Elective · Avifauna Cohabitation</p>
+                        <p class="project-description">
+                            Exploring the possibility of urban avifauna cohabitation. My work revolved around designing nesting strategies for Barn Swallows under the guidance of Ar. Vikram Kohli.
+                        </p>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <div class="stat-value">Barn</div>
+                                <div class="stat-label">Swallow</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">Product</div>
+                                <div class="stat-label">Design</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">Eco</div>
+                                <div class="stat-label">System</div>
+                            </div>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">Cohabitation</span>
+                            <span class="tag">Ecology</span>
+                            <span class="tag">Research</span>
+                        </div>
                     </div>
                 </div>
-            </article>
 
-             <article class="card">
-                <img src="indian 2.PNG" alt="First Year Architecture Work" class="card-image">
-                <div class="card-content">
-                    <span class="card-category">Academic Foundations</span>
-                    <h3>First Year Studio</h3>
-                    <p>Explorations in form, space, and basic design principles during the foundational year.</p>
-                    <div class="tags">
-                        <span>Sketching</span>
-                        <span>Basic Design</span>
+                <div class="project-card reveal" onclick="openModal('graphic')">
+                    <div class="project-header">
+                        <span class="project-number">05</span>
+                        <span class="project-year">2020-Present</span>
+                    </div>
+                    <h3 class="project-title">Freelance Graphic Design</h3>
+                    <p class="project-meta">Self Employed · Visual Identity</p>
+                    <p class="project-description">
+                        Over 5 years of experience as a freelance graphic designer. 
+                        Creating visual identities, branding materials, murals and digital assets while pursuing architectural studies.
+                    </p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">5+</div>
+                            <div class="stat-label">Years</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Visual</div>
+                            <div class="stat-label">Identity</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Digital</div>
+                            <div class="stat-label">Media</div>
+                        </div>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">Graphic Design</span>
+                        <span class="tag">Freelance</span>
+                        <span class="tag">Visual Communication</span>
                     </div>
                 </div>
-            </article>
 
+                 <div class="project-card reveal" onclick="openModal('extra')">
+                     <div class="card-cover" style="background-image: url('images/leadership honor.png');"></div>
+                     <div class="card-content">
+                        <div class="project-header">
+                            <span class="project-number">06</span>
+                            <span class="project-year">Ongoing</span>
+                        </div>
+                        <h3 class="project-title">Leadership & Honors</h3>
+                        <p class="project-meta">Achievements · Initiatives</p>
+                        <p class="project-description">
+                            Key leadership roles including Trophy Head and NASA achievements, alongside organizational initiatives like ThinkStartup.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">NASA Top 25</span>
+                            <span class="tag">Trophy Head</span>
+                            <span class="tag">Management</span>
+                        </div>
+                     </div>
+                </div>
+
+                 <div class="project-card reveal" onclick="openModal('interests')">
+                     <div class="card-cover" style="background-image: url('images/creative and personal.png');"></div>
+                     <div class="card-content">
+                        <div class="project-header">
+                            <span class="project-number">07</span>
+                            <span class="project-year">Creative</span>
+                        </div>
+                        <h3 class="project-title">Creative & Personal</h3>
+                        <p class="project-meta">Fine Arts · Athletics</p>
+                        <p class="project-description">
+                            Explorations in photography, oil painting, and hand-work, alongside competitive sports engagement.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Photography</span>
+                            <span class="tag">Painting</span>
+                            <span class="tag">Table Tennis</span>
+                        </div>
+                     </div>
+                </div>
+
+                 <div class="project-card reveal" onclick="openModal('firstyear')">
+                     <div class="project-header">
+                         <span class="project-number">08</span>
+                         <span class="project-year">2024-25</span>
+                     </div>
+                     <h3 class="project-title">First Year Design Studio</h3>
+                     <p class="project-meta">Foundation Design · Form & Space</p>
+                     <p class="project-description">
+                         Explorations in product design, ergonomics, and architectural narrative. From bamboo artifacts to experiential pavilions inspired by music.
+                     </p>
+                     <div class="project-tags">
+                         <span class="tag">Product Design</span>
+                         <span class="tag">Documentation</span>
+                         <span class="tag">Pavilion</span>
+                         <span class="tag">Lucknow</span>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <p>
+                Open to collaborations and architectural opportunities.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:aarnashrimali8638@gmail.com" class="contact-btn">Email</a>
+                <a href="https://www.linkedin.com/in/aarna-shrimali-029983209" class="contact-btn">LinkedIn</a>
+                <a href="tel:+918889826085" class="contact-btn">Phone: +91 88898 26085</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Aarna Shrimali</p>
+    </footer>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Fullscreen View">
+    </div>
+
+    <div id="phcModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('phc')">&times;</button>
+            <h2 class="modal-title">The Well of Time: Primary Health Centre</h2>
+            
+            <div class="modal-section">
+                <h3>Overview</h3>
+                <p>
+                    <strong>Location:</strong> Bhopal, Madhya Pradesh<br>
+                    <strong>Structure:</strong> RCC Frame with Infill Walls<br><br>
+                    "The Well of Time", part of my Semester 3 design project, reimagines the Primary Health Centre (PHC) as an environment where the emotional weight of waiting is softened through architecture. Rather than functioning as a purely clinical institution, the PHC becomes a gentle spatial journey — from compression to expansion to stillness.
+                </p>
+            </div>
+
+            <div class="image-grid">
+                <div>
+                    <img src="images/elevation with tree.png" class="grid-img zoomable" onclick="openLightbox(this.src)" alt="Elevation with Tree">
+                    <p class="caption">Elevation</p>
+                </div>
+                <div>
+                    <img src="images/section with tree.png" class="grid-img zoomable" onclick="openLightbox(this.src)" alt="Section with Tree">
+                    <p class="caption">Section</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Design Philosophy</h3>
+                <p>The design is guided by two principles: psychological ease and functional clarity. The building is organized around a high, light-filled courtyard, turning it into a calm "time well" that naturally ventilates and anchors the entire plan.</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>Zoning Strategy</h3>
+                <ul>
+                    <li><strong>Public Zone:</strong> Registration and waiting areas placed at the front, defined by lower ceilings that slow the mind and create a grounded entry.</li>
+                    <li><strong>Shared / Community Zone:</strong> A double-height central courtyard acts as the emotional and climatic core. This is where time "opens up," aided by diffused light and shaded edges.</li>
+                    <li><strong>Clinical / Private Zone:</strong> Consultation rooms and treatment areas occupy the quieter low-height wings, offering a return to comfort, privacy, and stillness.</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Key Architectural Features</h3>
+                <ul>
+                    <li><strong>Height as Experience:</strong> The form transitions low → high → low, shaping a psychological gradient from tension to release to calm.</li>
+                    <li><strong>Passive Cooling:</strong> The courtyard works as a stack-ventilation well, drawing cool air through shaded corridors and releasing warm air upward.</li>
+                    <li><strong>Light Control:</strong> A subtle clerestory band with perforations brings in soft, non-glare daylight.</li>
+                    <li><strong>Materiality:</strong> Locally available stone, brick, and exposed concrete to create a robust, low-maintenance public building with culturally familiar tactile quality.</li>
+                </ul>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Aarna. Built for GitHub Pages.</p>
-    </footer>
+    <div id="nsaModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('nsa')">&times;</button>
+            <h2 class="modal-title">Summer Internship @ NSA+</h2>
+            
+            <div class="modal-section">
+                <h3>Overview</h3>
+                <p>
+                   During the Summer of 2025, I interned at NSA+, Indore, an architectural firm known for its rigorous design approach. My primary focus was on bridging the gap between design concepts and digital representation.
+                </p>
+            </div>
 
+            <div class="modal-section">
+                <h3>Key Responsibilities</h3>
+                <ul>
+                    <li><strong>3D Modelling:</strong> Spearheaded the 3D modelling for two significant firm projects.</li>
+                    <li><strong>Software Proficiency:</strong> Utilized Revit to ensure model accuracy and detailed visualization.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="sparrowModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('sparrow')">&times;</button>
+            <h2 class="modal-title">100 Sparrow Project: Avifauna Cohabitation</h2>
+            
+            <div class="modal-section">
+                <h3>Overview</h3>
+                <p>
+                   As part of an academic elective under Ar. Vikram Kohli, this project explored the possibilities of cohabitation between humans and avifauna in dense urban environments.
+                </p>
+            </div>
+
+            <div class="modal-section">
+                <h3>Design Focus</h3>
+                <ul>
+                    <li><strong>Species Specificity:</strong> The project revolved around designing for the <strong>Barn Swallow</strong>, analyzing its nesting habits and flight patterns.</li>
+                    <li><strong>Cohabitation Modules:</strong> Developed architectural interventions and nesting modules that can be integrated into existing building fabrics without conflict.</li>
+                    <li><strong>Materiality:</strong> Investigated bird-friendly materials that encourage nesting while remaining durable.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="firstyearModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('firstyear')">&times;</button>
+            <h2 class="modal-title">First Year Design Studio</h2>
+            
+            <div class="modal-section">
+                <h3>Semester 1: Form & Function</h3>
+                <ul>
+                    <li><strong>Product Design:</strong> A multi-functional headphone and phone stand crafted from bamboo, featuring an adjustable length mechanism for versatility.</li>
+                    <li><strong>Deconstruction & Documentation:</strong> Dismantling a camera to understand its internal logic, inspired by "Things Come Apart" by Todd McLellan. This exercise focused on meticulous documentation of components.</li>
+                    <li><strong>Ergonomics & Form:</strong> An in-depth study of camcorder ergonomics which served as the basis for further form development exercises.</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Semester 2: The DAMN. Pavilion</h3>
+                <p>Located in Lucknow, this pavilion is conceptually inspired by Kendrick Lamar's album <em>DAMN.</em> The core idea explores how the narrative changes when experienced from start-to-end versus end-to-start.</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>Architectural Translation</h3>
+                <ul>
+                    <li><strong>Duality of Experience:</strong> The structure features two distinct openings—one small and one large. The steps leading up or down create differing perceptions of distance, altering the user's physical and emotional journey.</li>
+                    <li><strong>Contextual Reflection:</strong> Below the main structure, elements like falling water and column density interact to create a mix of congested and open spaces. This mirrors the dichotomy of spaces found within the city of Lucknow, designed to make the user feel the essence of the city.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="graphicModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('graphic')">&times;</button>
+            <h2 class="modal-title">Freelance Graphic Design</h2>
+            
+            <div class="modal-section">
+                <h3>Experience</h3>
+                <p>
+                   With over 5 years of experience (September 2020 - Present), I have worked as a self-employed graphic designer alongside my architectural studies. This dual-discipline approach allows me to understand composition, hierarchy, and visual communication at both 2D and 3D scales.
+                </p>
+            </div>
+            
+            <div class="modal-section">
+                <h3>Scope of Work</h3>
+                <ul>
+                    <li>Brand Identity Design</li>
+                    <li>Layout & Editorial Design</li>
+                    <li>Digital Asset Creation</li>
+                    <li>Visual storytelling for architectural presentations</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="codingModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('coding')">&times;</button>
+            <h2 class="modal-title">Algorithmic Explorations: Creative Coding</h2>
+            
+            <div class="modal-section">
+                <p>Exploring "Chaos equations" in mathematics visually through code. These projects were built using the p5.js library</p>
+                
+                <video controls autoplay loop muted playsinline class="project-img">
+                    <source src="images/thomas attractor.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p class="caption">Thomas Attractor Simulation</p>
+
+                <video controls autoplay loop muted playsinline class="project-img">
+                    <source src="images/rectangle-ish final.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p class="caption">Generative Geometry</p>
+
+                <h3>Experiments</h3>
+                <ul>
+                    <li><strong>Generative Patterns:</strong> Algorithms that create unique visual textures with every reload.</li>
+                    <li><strong>Interactive Canvas:</strong> Visuals that respond to mouse movement and user input.</li>
+                    <li><strong>Logic & Loop:</strong> Translating mathematical concepts into visual art.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="extraModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('extra')">&times;</button>
+            <h2 class="modal-title">Leadership & Honors</h2>
+            
+            <div class="modal-section">
+                <h3>Achievements</h3>
+                 <ul>
+                    <li><strong>NASA Short Film Trophy:</strong> My team was shortlisted in the <strong>Top 25</strong> nationwide. My role was in creative direction, screenwriting and I also helped out with cinematography.</li>
+                </ul>
+
+                <h3>Roles</h3>
+                <ul>
+                    <li><strong>Trophy Head (WAT & GSEN):</strong> Leading college teams for design competitions, coordinating design strategy and submission logistics.</li>
+                    <li>
+                        <strong>Architecture Brio Insider Program:</strong> Selected for this competitive mentorship program under NASA, engaging with industry leaders.
+                        <div class="image-grid">
+                            <img src="images/architecture brio 1.jpg" class="grid-img" alt="Architecture Brio Experience 1">
+                            <img src="images/architecture brio group.png" class="grid-img" alt="Architecture Brio Group Photo">
+                        </div>
+                    </li>
+                    <li><strong>MoE's Innovation Cell:</strong> Spearheaded the "Passion Projects" initiative to integrate student-led research into the curriculum.</li>
+                    <li><strong>ThinkStartup Internship (2023):</strong> Interned for 5 months, playing a key role in the Youth Ideathon 2023 organizing committee.</li>
+                    <li><strong>Good Earth Enterprise:</strong> Served as General Manager for 1 year, overseeing operations and team coordination.</li>
+                </ul>
+
+                <h3>TedEd Club</h3>
+                <p>Delivered two Ted-Ed talks in high school. Active speaker and organizer.</p>
+                
+                <div class="video-grid">
+                    <div>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/XPYjYFOlFV8" title="Breaking Through the Grey" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-caption">Breaking Through the Grey</div>
+                    </div>
+                    <div>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/bk0RVU16KsQ" title="Is Reality Real?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-caption">Is Reality Real?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="interestsModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('interests')">&times;</button>
+            <h2 class="modal-title">Creative Interests & Athletics</h2>
+            
+            <div class="modal-section">
+                <h3>Documentation</h3>
+                <ul>
+                    <li><strong>Photography:</strong> Exploring architectural composition and light through the lens.</li>
+                    <li><strong>Oil Painting:</strong> Focusing on texture, color theory, and abstract expressionism which I learnt from my mother.</li>
+                    <li><strong>Sketching:</strong> Various mediums such as charcoal, watercolor.</li>
+                </ul>
+
+                <h3>Athletics</h3>
+                <ul>
+                    <li><strong>Table Tennis:</strong> Competitive player.</li>
+                    <li>
+                        <strong>Tennis, Football:</strong> Active enthusiast.
+                        <img src="images/football.JPEG" class="project-img" style="margin-top: 1rem;" alt="Football Interest">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(project) {
+            const modal = document.getElementById(project + 'Modal');
+            if(modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(project) {
+            const modal = document.getElementById(project + 'Modal');
+            if(modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        // --- LIGHTBOX FUNCTIONS (Added per request) ---
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling bg
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            // Check if a modal is open before re-enabling scroll
+            const activeModal = document.querySelector('.modal.active');
+            if (!activeModal) {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Simple Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
